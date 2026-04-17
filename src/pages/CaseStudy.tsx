@@ -1,5 +1,4 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ContactSection from '../components/ContactSection'
 import SectionBadge from '../components/SectionBadge'
@@ -16,7 +15,7 @@ export default function CaseStudy() {
 
   return (
     <div>
-      <Nav pageName="CASE STUDY" pageNumber="03" />
+
 
       {/* Header */}
       <section style={{ padding: '80px 32px 48px' }}>

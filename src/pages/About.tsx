@@ -1,30 +1,31 @@
-import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ContactSection from '../components/ContactSection'
 import SectionBadge from '../components/SectionBadge'
 import TextureCard from '../components/TextureCard'
+import FadeUp from '../components/FadeUp'
 import { team, awards, values } from '../data'
 
 export default function About() {
   return (
     <div>
-      <Nav pageName="ABOUT" pageNumber="05" />
 
       {/* Header */}
       <section style={{ padding: '80px 32px 64px' }}>
         <SectionBadge label="• ABOUT" />
-        <div
-          style={{
-            fontSize: 'clamp(60px, 12vw, 120px)',
-            fontWeight: 800,
-            letterSpacing: '-0.04em',
-            lineHeight: 0.9,
-            color: 'var(--heading)',
-            margin: '24px 0 28px',
-          }}
-        >
-          utity®
-        </div>
+        <FadeUp>
+          <div
+            style={{
+              fontSize: 'clamp(60px, 12vw, 120px)',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              lineHeight: 0.9,
+              color: 'var(--heading)',
+              margin: '24px 0 28px',
+            }}
+          >
+            utity®
+          </div>
+        </FadeUp>
         <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--text)', maxWidth: 560, marginBottom: 40 }}>
           Somos un equipo pequeño movido por la curiosidad y la artesanía. Creemos en marcas útiles — de ahí el nombre.
         </p>
@@ -77,29 +78,30 @@ export default function About() {
           CÓMO TRABAJAMOS
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }}>
-          {values.map((v) => (
-            <div
-              key={v.title}
-              style={{
-                borderTop: '1px solid var(--border)',
-                paddingTop: 24,
-              }}
-            >
-              <h3
+          {values.map((v, index) => (
+            <FadeUp key={v.title} delay={index * 0.08}>
+              <div
                 style={{
-                  fontSize: 20,
-                  fontWeight: 800,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--heading)',
-                  marginBottom: 10,
+                  borderTop: '1px solid var(--border)',
+                  paddingTop: 24,
                 }}
               >
-                {v.title}
-              </h3>
-              <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
-                {v.description}
-              </p>
-            </div>
+                <h3
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 800,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--heading)',
+                    marginBottom: 10,
+                  }}
+                >
+                  {v.title}
+                </h3>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
+                  {v.description}
+                </p>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </section>
@@ -125,16 +127,18 @@ export default function About() {
           Personas detrás del trabajo.
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
-          {team.map((member) => (
-            <div key={member.name}>
-              <TextureCard color={member.color} height={180} style={{ marginBottom: 12 }} />
-              <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--heading)' }}>
-                {member.name}
+          {team.map((member, index) => (
+            <FadeUp key={member.name} delay={index * 0.07}>
+              <div>
+                <TextureCard color={member.color} height={180} style={{ marginBottom: 12 }} />
+                <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--heading)' }}>
+                  {member.name}
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--text)', marginTop: 3 }}>
+                  {member.role}
+                </div>
               </div>
-              <div style={{ fontSize: 12, color: 'var(--text)', marginTop: 3 }}>
-                {member.role}
-              </div>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </section>
@@ -203,28 +207,29 @@ export default function About() {
           Premios & menciones.
         </h2>
         <div style={{ borderTop: '1px solid var(--border)' }}>
-          {awards.map((a) => (
-            <div
-              key={a.award}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr auto',
-                gap: 24,
-                padding: '20px 0',
-                borderBottom: '1px solid var(--border)',
-                alignItems: 'center',
-              }}
-            >
-              <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--heading)' }}>
-                {a.award}
-              </span>
-              <span style={{ fontSize: 14, color: 'var(--text)' }}>
-                {a.project}
-              </span>
-              <span style={{ fontSize: 13, color: 'var(--text)', letterSpacing: '0.04em' }}>
-                {a.year}
-              </span>
-            </div>
+          {awards.map((a, index) => (
+            <FadeUp key={a.award} delay={index * 0.08}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr auto',
+                  gap: 24,
+                  padding: '20px 0',
+                  borderBottom: '1px solid var(--border)',
+                  alignItems: 'center',
+                }}
+              >
+                <span style={{ fontWeight: 600, fontSize: 15, color: 'var(--heading)' }}>
+                  {a.award}
+                </span>
+                <span style={{ fontSize: 14, color: 'var(--text)' }}>
+                  {a.project}
+                </span>
+                <span style={{ fontSize: 13, color: 'var(--text)', letterSpacing: '0.04em' }}>
+                  {a.year}
+                </span>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </section>

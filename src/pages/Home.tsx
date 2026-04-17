@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import Nav from '../components/Nav'
+import { motion } from 'motion/react'
 import Footer from '../components/Footer'
 import ContactSection from '../components/ContactSection'
 import SectionBadge from '../components/SectionBadge'
 import TextureCard from '../components/TextureCard'
+import FadeUp from '../components/FadeUp'
 import { projects, stats } from '../data'
 
 export default function Home() {
@@ -12,11 +13,13 @@ export default function Home() {
 
   return (
     <div>
-      <Nav pageName="HOME" pageNumber="01" />
 
       {/* Hero */}
       <section style={{ padding: '80px 32px 64px' }}>
-        <h1
+        <motion.h1
+          initial={{ opacity: 0, y: 48 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           style={{
             fontSize: 'clamp(52px, 8vw, 88px)',
             fontWeight: 800,
@@ -28,8 +31,11 @@ export default function Home() {
           }}
         >
           Agencia 360 con foco en lo esencial.
-        </h1>
-        <p
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 48 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
           style={{
             fontSize: 11,
             letterSpacing: '0.14em',
@@ -39,19 +45,25 @@ export default function Home() {
           }}
         >
           CÓRDOBA · MADRID · REMOTO · EST. 2019
-        </p>
-        <Link
-          to="/contact"
-          style={{
-            fontSize: 15,
-            color: 'var(--heading)',
-            textDecoration: 'underline',
-            textUnderlineOffset: 4,
-            fontWeight: 500,
-          }}
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 48 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
         >
-          Comenzar proyecto ↗
-        </Link>
+          <Link
+            to="/contact"
+            style={{
+              fontSize: 15,
+              color: 'var(--heading)',
+              textDecoration: 'underline',
+              textUnderlineOffset: 4,
+              fontWeight: 500,
+            }}
+          >
+            Comenzar proyecto ↗
+          </Link>
+        </motion.div>
 
         {/* Project cards row 1 */}
         <div
@@ -62,10 +74,12 @@ export default function Home() {
             marginTop: 64,
           }}
         >
-          {heroProjects.map((p) => (
-            <Link key={p.slug} to={`/works/${p.slug}`} style={{ textDecoration: 'none' }}>
-              <TextureCard color={p.color} label={p.name} aspectRatio="4/3" />
-            </Link>
+          {heroProjects.map((p, index) => (
+            <FadeUp key={p.slug} delay={index * 0.1}>
+              <Link to={`/works/${p.slug}`} style={{ textDecoration: 'none' }}>
+                <TextureCard color={p.color} label={p.name} aspectRatio="4/3" />
+              </Link>
+            </FadeUp>
           ))}
         </div>
 
@@ -78,10 +92,12 @@ export default function Home() {
             marginTop: 16,
           }}
         >
-          {secondRowProjects.map((p) => (
-            <Link key={p.slug} to={`/works/${p.slug}`} style={{ textDecoration: 'none' }}>
-              <TextureCard color={p.color} label={p.name} aspectRatio="16/7" />
-            </Link>
+          {secondRowProjects.map((p, index) => (
+            <FadeUp key={p.slug} delay={index * 0.1}>
+              <Link to={`/works/${p.slug}`} style={{ textDecoration: 'none' }}>
+                <TextureCard color={p.color} label={p.name} aspectRatio="16/7" />
+              </Link>
+            </FadeUp>
           ))}
         </div>
       </section>
@@ -97,24 +113,26 @@ export default function Home() {
           gap: 32,
         }}
       >
-        {stats.map((s) => (
-          <div key={s.number}>
-            <div
-              style={{
-                fontSize: 64,
-                fontWeight: 800,
-                letterSpacing: '-0.04em',
-                color: 'var(--heading)',
-                lineHeight: 1,
-                marginBottom: 12,
-              }}
-            >
-              {s.number}
+        {stats.map((s, index) => (
+          <FadeUp key={s.number} delay={index * 0.1}>
+            <div>
+              <div
+                style={{
+                  fontSize: 64,
+                  fontWeight: 800,
+                  letterSpacing: '-0.04em',
+                  color: 'var(--heading)',
+                  lineHeight: 1,
+                  marginBottom: 12,
+                }}
+              >
+                {s.number}
+              </div>
+              <p style={{ fontSize: 13, lineHeight: 1.5, color: 'var(--text)' }}>
+                {s.description}
+              </p>
             </div>
-            <p style={{ fontSize: 13, lineHeight: 1.5, color: 'var(--text)' }}>
-              {s.description}
-            </p>
-          </div>
+          </FadeUp>
         ))}
       </section>
 
@@ -131,37 +149,41 @@ export default function Home() {
       >
         <div>
           <SectionBadge label="• SERVICIOS" />
-          <h2
-            style={{
-              fontSize: 'clamp(36px, 5vw, 52px)',
-              fontWeight: 800,
-              letterSpacing: '-0.03em',
-              lineHeight: 1.1,
-              marginTop: 20,
-              color: 'var(--heading)',
-            }}
-          >
-            Todo lo que necesita una marca viva.
-          </h2>
+          <FadeUp>
+            <h2
+              style={{
+                fontSize: 'clamp(36px, 5vw, 52px)',
+                fontWeight: 800,
+                letterSpacing: '-0.03em',
+                lineHeight: 1.1,
+                marginTop: 20,
+                color: 'var(--heading)',
+              }}
+            >
+              Todo lo que necesita una marca viva.
+            </h2>
+          </FadeUp>
         </div>
         <div style={{ paddingTop: 8 }}>
-          <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text)' }}>
-            Somos una agencia 360: estrategia, identidad, producción y media bajo un mismo techo. Sin ping-pong entre proveedores. Sin reuniones para coordinar reuniones.
-          </p>
-          <Link
-            to="/services"
-            style={{
-              display: 'inline-block',
-              marginTop: 24,
-              fontSize: 14,
-              color: 'var(--heading)',
-              textDecoration: 'underline',
-              textUnderlineOffset: 4,
-              fontWeight: 500,
-            }}
-          >
-            Ver servicios ↗
-          </Link>
+          <FadeUp delay={0.1}>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text)' }}>
+              Somos una agencia 360: estrategia, identidad, producción y media bajo un mismo techo. Sin ping-pong entre proveedores. Sin reuniones para coordinar reuniones.
+            </p>
+            <Link
+              to="/services"
+              style={{
+                display: 'inline-block',
+                marginTop: 24,
+                fontSize: 14,
+                color: 'var(--heading)',
+                textDecoration: 'underline',
+                textUnderlineOffset: 4,
+                fontWeight: 500,
+              }}
+            >
+              Ver servicios ↗
+            </Link>
+          </FadeUp>
         </div>
       </section>
 
@@ -170,38 +192,42 @@ export default function Home() {
         <div style={{ marginBottom: 32 }}>
           <SectionBadge label="• TESTIMONIO" />
         </div>
-        <blockquote
-          style={{
-            fontSize: 'clamp(24px, 3.5vw, 38px)',
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.2,
-            color: 'var(--heading)',
-            margin: '0 0 32px',
-            maxWidth: 750,
-          }}
-        >
-          "Se tomaron el tiempo de entender nuestra marca como si fueran parte del equipo. El resultado habla solo."
-        </blockquote>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 40 }}>
-          <div
+        <FadeUp>
+          <blockquote
             style={{
-              width: 44,
-              height: 44,
-              borderRadius: '50%',
-              backgroundColor: '#d6d2cc',
-              flexShrink: 0,
+              fontSize: 'clamp(24px, 3.5vw, 38px)',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.2,
+              color: 'var(--heading)',
+              margin: '0 0 32px',
+              maxWidth: 750,
             }}
-          />
-          <div>
-            <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--heading)' }}>
-              Carla Mendes
-            </div>
-            <div style={{ fontSize: 12, color: 'var(--text)', marginTop: 2 }}>
-              Art Director · Lumen Skin
+          >
+            "Se tomaron el tiempo de entender nuestra marca como si fueran parte del equipo. El resultado habla solo."
+          </blockquote>
+        </FadeUp>
+        <FadeUp delay={0.15}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 40 }}>
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: '50%',
+                backgroundColor: '#d6d2cc',
+                flexShrink: 0,
+              }}
+            />
+            <div>
+              <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--heading)' }}>
+                Carla Mendes
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--text)', marginTop: 2 }}>
+                Art Director · Lumen Skin
+              </div>
             </div>
           </div>
-        </div>
+        </FadeUp>
         <TextureCard color="#ede8df" height={400} label="LUMEN SKIN · ART DIRECTION" />
       </section>
 

@@ -1,13 +1,12 @@
-import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ContactSection from '../components/ContactSection'
 import SectionBadge from '../components/SectionBadge'
+import FadeUp from '../components/FadeUp'
 import { services, processSteps } from '../data'
 
 export default function Services() {
   return (
     <div>
-      <Nav pageName="SERVICES" pageNumber="04" />
 
       {/* Header */}
       <section style={{ padding: '80px 32px 64px' }}>
@@ -39,87 +38,90 @@ export default function Services() {
         }}
       >
         {services.map((s, i) => (
-          <div
-            key={s.name}
-            style={{
-              padding: '40px 32px',
-              border: '1px solid var(--border)',
-              borderTop: 'none',
-              borderLeft: i % 2 === 0 ? 'none' : '1px solid var(--border)',
-              position: 'relative',
-            }}
-          >
+          <FadeUp key={s.name} delay={i * 0.1}>
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                marginBottom: 24,
+                padding: '40px 32px',
+                border: '1px solid var(--border)',
+                borderTop: 'none',
+                borderLeft: i % 2 === 0 ? 'none' : '1px solid var(--border)',
+                position: 'relative',
               }}
             >
-              <span
+              <div
                 style={{
-                  fontSize: 11,
-                  letterSpacing: '0.08em',
-                  color: 'var(--text)',
-                  fontWeight: 500,
-                }}
-              >
-                {s.number}
-              </span>
-              <span
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  border: '1px solid var(--border)',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 18,
-                  color: 'var(--text)',
-                  cursor: 'pointer',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginBottom: 24,
                 }}
               >
-                +
-              </span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: '0.08em',
+                    color: 'var(--text)',
+                    fontWeight: 500,
+                  }}
+                >
+                  {s.number}
+                </span>
+                <span
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: '50%',
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 18,
+                    color: 'var(--text)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  +
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontSize: 28,
+                  fontWeight: 800,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--heading)',
+                  marginBottom: 12,
+                }}
+              >
+                {s.name}
+              </h2>
+              <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
+                {s.description}
+              </p>
             </div>
-            <h2
-              style={{
-                fontSize: 28,
-                fontWeight: 800,
-                letterSpacing: '-0.03em',
-                color: 'var(--heading)',
-                marginBottom: 12,
-              }}
-            >
-              {s.name}
-            </h2>
-            <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
-              {s.description}
-            </p>
-          </div>
+          </FadeUp>
         ))}
       </section>
 
       {/* Process */}
       <section style={{ padding: '80px 32px' }}>
         <SectionBadge label="• PROCESO" />
-        <h2
-          style={{
-            fontSize: 'clamp(36px, 5vw, 56px)',
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
-            lineHeight: 1.1,
-            color: 'var(--heading)',
-            margin: '20px 0 16px',
-          }}
-        >
-          Pasos simples para llegar lejos.
-        </h2>
-        <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text)', maxWidth: 500, marginBottom: 48 }}>
-          No perdemos tu tiempo en iteraciones infinitas — trabajamos en sprints semanales con entregas reales.
-        </p>
+        <FadeUp>
+          <h2
+            style={{
+              fontSize: 'clamp(36px, 5vw, 56px)',
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.1,
+              color: 'var(--heading)',
+              margin: '20px 0 16px',
+            }}
+          >
+            Pasos simples para llegar lejos.
+          </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.7, color: 'var(--text)', maxWidth: 500, marginBottom: 48 }}>
+            No perdemos tu tiempo en iteraciones infinitas — trabajamos en sprints semanales con entregas reales.
+          </p>
+        </FadeUp>
 
         <div
           style={{
@@ -128,31 +130,32 @@ export default function Services() {
             gap: 16,
           }}
         >
-          {processSteps.map((step) => (
-            <div
-              key={step.badge}
-              style={{
-                background: '#f0ede8',
-                borderRadius: 12,
-                padding: '36px 32px',
-              }}
-            >
-              <SectionBadge label={step.badge} />
-              <h3
+          {processSteps.map((step, i) => (
+            <FadeUp key={step.badge} delay={i * 0.1}>
+              <div
                 style={{
-                  fontSize: 22,
-                  fontWeight: 800,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--heading)',
-                  margin: '16px 0 10px',
+                  background: '#f0ede8',
+                  borderRadius: 12,
+                  padding: '36px 32px',
                 }}
               >
-                {step.title}
-              </h3>
-              <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
-                {step.description}
-              </p>
-            </div>
+                <SectionBadge label={step.badge} />
+                <h3
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 800,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--heading)',
+                    margin: '16px 0 10px',
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: 'var(--text)' }}>
+                  {step.description}
+                </p>
+              </div>
+            </FadeUp>
           ))}
         </div>
       </section>

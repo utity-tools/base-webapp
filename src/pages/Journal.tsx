@@ -1,14 +1,13 @@
-import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ContactSection from '../components/ContactSection'
 import SectionBadge from '../components/SectionBadge'
 import TextureCard from '../components/TextureCard'
+import FadeUp from '../components/FadeUp'
 import { journalPosts } from '../data'
 
 export default function Journal() {
   return (
     <div>
-      <Nav pageName="JOURNAL" pageNumber="06" />
 
       <section style={{ padding: '80px 32px 64px' }}>
         <SectionBadge label="• JOURNAL" />
@@ -37,28 +36,30 @@ export default function Journal() {
           padding: '0 32px 80px',
         }}
       >
-        {journalPosts.map((post) => (
-          <article key={post.slug}>
-            <TextureCard color={post.color} height={280} style={{ marginBottom: 20 }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-              <SectionBadge label={`• ${post.category}`} />
-              <span style={{ fontSize: 11, color: 'var(--text)', letterSpacing: '0.08em' }}>
-                {post.readTime}
-              </span>
-            </div>
-            <h2
-              style={{
-                fontSize: 22,
-                fontWeight: 800,
-                letterSpacing: '-0.02em',
-                lineHeight: 1.2,
-                color: 'var(--heading)',
-                cursor: 'pointer',
-              }}
-            >
-              {post.title}
-            </h2>
-          </article>
+        {journalPosts.map((post, index) => (
+          <FadeUp key={post.slug} delay={index * 0.1}>
+            <article>
+              <TextureCard color={post.color} height={280} style={{ marginBottom: 20 }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+                <SectionBadge label={`• ${post.category}`} />
+                <span style={{ fontSize: 11, color: 'var(--text)', letterSpacing: '0.08em' }}>
+                  {post.readTime}
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontSize: 22,
+                  fontWeight: 800,
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2,
+                  color: 'var(--heading)',
+                  cursor: 'pointer',
+                }}
+              >
+                {post.title}
+              </h2>
+            </article>
+          </FadeUp>
         ))}
       </section>
 
